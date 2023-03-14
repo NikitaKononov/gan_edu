@@ -1,6 +1,7 @@
-import random
-import cv2
 import os
+import random
+
+import cv2
 import numpy as np
 
 img_list = os.listdir('./avatars')
