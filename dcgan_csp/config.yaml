@@ -1,0 +1,18 @@
+dataroot: "../data"
+workers: 8
+batch_size: 128
+seed: 999
+image_size: 64
+nc: 3 # Number of channels in the training images. For color images this is 3
+nz: 100 # Size of z latent vector (i.e. size of generator input)
+ngf: 64 # Size of feature maps in generator
+ndf: 64 # Size of feature maps in discriminator
+num_epochs: 10
+lr_g: 5e-4
+lr_d: 5e-4
+beta1: 0.5 # Beta1 hyperparam for Adam optimizers
+log_interval: 250
+eval_interval: 2500
+proj_name: "dcgan_celeba"
+exp_name: "conv_blocks"
+exp_ver: "classic"
