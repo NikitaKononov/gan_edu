@@ -1,21 +1,17 @@
 from __future__ import print_function
-import yaml
-import argparse
-import os
+
 import random
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.parallel
-import torch.backends.cudnn as cudnn
 import torch.optim as optim
 import torch.utils.data
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-from IPython.display import HTML
+import yaml
 from clearml import Task
 
 from model import Generator, Discriminator
@@ -82,9 +78,6 @@ def train(netG, netD, optimizerG, optimizerD, device, dataloader, fixed_noise, c
 
                 logger.report_scalar(title="Unified graph", series="Loss_D", iteration=global_step, value=errD.item())
                 logger.report_scalar(title="Unified graph", series="Loss_G", iteration=global_step, value=errG.item())
-                logger.report_scalar(title="Unified graph", series="D(x)", iteration=global_step, value=D_x)
-                logger.report_scalar(title="Unified graph", series="D_G_z1", iteration=global_step, value=D_G_z1)
-                logger.report_scalar(title="Unified graph", series="D_G_z2", iteration=global_step, value=D_G_z2)
 
             if global_step % config['eval_interval'] == 0 or (
                     (epoch == config['num_epochs'] - 1) and (i == len(dataloader) - 1)):
@@ -136,11 +129,8 @@ def init_training():
     netG = Generator().to(device)
     netD = Discriminator().to(device)
 
-    print('Generator total trainable params {}'.format(sum(p.numel() for p in netG.parameters() if p.requires_grad)))
-    print('Discriminator total trainable params {}'.format(sum(p.numel() for p in netD.parameters() if p.requires_grad)))
-
-    # print(netG)
-    # print(netD)
+    print('Generator trainable params {}'.format(sum(p.numel() for p in netG.parameters() if p.requires_grad)))
+    print('Discriminator trainable params {}'.format(sum(p.numel() for p in netD.parameters() if p.requires_grad)))
 
     fixed_noise = torch.randn(64, config['nz'], 1, 1, device=device)
 

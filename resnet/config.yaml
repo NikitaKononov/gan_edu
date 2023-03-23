@@ -1,18 +1,18 @@
 dataroot: "../data"
-workers: 8
-batch_size: 32
-seed: 999
+workers: 12
+batch_size: 128
+seed: 567
 image_size: 64
 nc: 3 # Number of channels in the training images. For color images this is 3
 nz: 100 # Size of z latent vector (i.e. size of generator input)
 ngf: 64 # Size of feature maps in generator
 ndf: 64 # Size of feature maps in discriminator
-num_epochs: 10
-lr_g: 1e-4
-lr_d: 2e-5
+num_epochs: 100
+lr_g: 4e-4
+lr_d: 5e-5
 beta1: 0.5 # Beta1 hyperparam for Adam optimizers
-log_interval: 250
-eval_interval: 10000
+log_interval: 125
+eval_interval: 2500
 proj_name: "dcgan_celeba"
 exp_name: "resnet_blocks"
-exp_ver: "1.0"
+exp_ver: "dropout only disc + diff lr > + bs128 + more residual"
